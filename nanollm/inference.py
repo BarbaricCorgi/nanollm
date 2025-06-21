@@ -30,7 +30,10 @@ class TextGenerator:
         tokenizer_path = os.path.join(checkpoint_path, "tokenizer.json")
         
         checkpoint = torch.load(model_path, map_location="cpu")
-        config = ModelConfig(**checkpoint["config"])
+        config_dict = checkpoint["config"].copy()
+        if "head_dim" in config_dict:
+            del config_dict["head_dim"]
+        config = ModelConfig(**config_dict)
         
         model = NanoLLM(config)
         model.load_state_dict(checkpoint["model_state_dict"])
