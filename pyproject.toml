@@ -1,0 +1,25 @@
+[project]
+name = "nanollm"
+version = "0.1.0"
+description = "A small language model for local execution"
+requires-python = ">=3.8"
+dependencies = [
+    "torch>=2.0.0",
+    "numpy>=1.21.0",
+    "tqdm>=4.62.0",
+    "transformers>=4.30.0",
+    "datasets>=2.0.0",
+    "sentencepiece>=0.1.99"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=22.0.0",
+    "flake8>=4.0.0",
+    "mypy>=0.950"
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
