@@ -1,0 +1,14 @@
+- after encoding we need to store the beggining of a sentence and its end to have a mechanism to stop generating sentences when infering
+- an unkown token is created when we need to encode tokens that exceeed our vocabulary
+- the transformer trains all the words simultaneously but depends on the positional encoding embedded in the token embedding to deal with position, then infers sequentially. some transformers don't use positional encoding, just depend on the causal mask to filter the current tokens available in the context.
+- multiple heads are let to learn in an unsupervised way different aspects of the relationship between words as order, semantics, gramatical pattern, the weights of the heads are stored as well as the tokens embeddings
+- position of tokens in the text are stored in the majority of models. it's called positional encodings. different mechanisms exist to store positional encoding, like AST treets, absolute position in text and relative position. even no position at all, and simply depending on causal masks for context.
+- there is this cache in memory with query, key and value during inference to determine what's being asked, what information we have and what's te value of that information and avoid recomputation
+- around 200 directions exist in a token enconding meaning normally, deep seek was able to compress the low level attention representation, by compressing the embeddings dimensions there, while allowing the attention heads to expand to full size. that's why just as jpeg it is possible to compress the attention heads initially before going into more detailed higher dimensions.
+- Mixture of experts is indeed chosen by the dimensions activated by the sequence asked
+- altough deepseek stores the weights in fp8 it computes in fp16 for precision
+- backpropagation is still used to update the weights, we check what values were computed and determine with functions like -log(x) how different the values were and update the weights
+- need to check normalization layers, what's stored in the model and how to compute a useful model to check the math in debugging
+- causal mask is used to hide future tokens in training
+- residual connections deal with the issue of gradient getting weaker as it goes backprop into the layers
+- just as values may compose exponentially into nothingness or huge values, we use the normalization layer to transfor the range into a nice one around -1 and 1 more or less, using the variance and mean
